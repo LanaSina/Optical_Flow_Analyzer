@@ -18,12 +18,16 @@ def draw_tracks(img, data, vector_scale=60, circle_size=2, circle_color="yellow"
 
     return img
 
-def save_data(image, vectors, output_path, original_filename, verbose = 1):
+def save_data(image, vectors, output_path, original_filename, verbose = 1, output_file=""):
     filename = original_filename.split("/")
     filename = filename[len(filename)-1]
     temp = filename.split(".")
 
-    output_file = output_path + "/" + temp[0] + ".png"
+    if(len(save_name)>0):
+        output_file = save_name
+    else:
+        output_file = output_path + "/" + temp[0] + ".png"
+        
     if verbose == 1:
         print("saving", output_file)
     cv2.imwrite(output_file, image)    
@@ -35,7 +39,7 @@ def save_data(image, vectors, output_path, original_filename, verbose = 1):
 # returns image with vector tracks and vector data
 def lucas_kanade(file1, file2, output_path = "./",
     vector_scale=60, circle_size=2, circle_color="yellow", line_width=2, line_color="red",
-    save = True, verbose =1):
+    save = True, verbose =1, save_name=""):
 
     conf_path = os.path.dirname(os.path.abspath(__file__)) + "/config.yaml"
     if not os.path.exists(output_path+"/csv/"):
@@ -79,7 +83,7 @@ def lucas_kanade(file1, file2, output_path = "./",
 
     if save:
         img2 = draw_tracks(img2, data, vector_scale, circle_size, circle_color, line_width, line_color)
-        save_data(img2, data, output_path, file1, verbose)
+        save_data(img2, data, output_path, file1, verbose, save_name)
 
     results = {"image":img2, "vectors":data}
     return results
