@@ -18,7 +18,7 @@ def draw_tracks(img, data, vector_scale=60, circle_size=2, circle_color="yellow"
 
     return img
 
-def save_data(image, vectors, output_path, original_filename, verbose = 1, output_file=""):
+def save_data(image, vectors, output_path, original_filename, verbose = 1, save_name=""):
     filename = original_filename.split("/")
     filename = filename[len(filename)-1]
     temp = filename.split(".")
@@ -27,7 +27,7 @@ def save_data(image, vectors, output_path, original_filename, verbose = 1, outpu
         output_file = save_name
     else:
         output_file = output_path + "/" + temp[0] + ".png"
-        
+
     if verbose == 1:
         print("saving", output_file)
     cv2.imwrite(output_file, image)    
