@@ -13,7 +13,7 @@ def draw_tracks(img, data, vector_scale=60, circle_size=2, circle_color="yellow"
             'yellow': [0, 255, 255], 'white': [255, 255, 255]}
     # draw the tracks
     for x, y, dx, dy in data:
-        cv2.line(img, (x, y), (int(x + vector_scale*dx), int(y + vector_scale*dy)), colormap[line_color], line_width)
+        cv2.line(img, (int(x), int(y)), (int(x + vector_scale*dx), int(y + vector_scale*dy)), colormap[line_color], line_width)
         cv2.circle(img, (int(x), int(y)), circle_size, colormap[circle_color], -1)
 
     return img
